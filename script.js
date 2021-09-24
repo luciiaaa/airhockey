@@ -2,7 +2,7 @@
   
 
 function setup() {
-	createCanvas(500, 400);
+	createCanvas(700, 400);
 
   x = 55;
   y = 200;
@@ -20,7 +20,7 @@ function draw() {
 
   
 
-  if(x <= 0 || x > 500){
+  if(x <= 0 || x > 700){
     v = v * -1;
   }
 
@@ -30,9 +30,5 @@ function draw() {
   
   
 
-  
-
-
-  
 }
 	
