@@ -1,3 +1,5 @@
+var cx, px, cy, py, cv, pv;
+
 
 class Ball {
   constructor(x, y, h, w, vx, vy) {
@@ -26,14 +28,38 @@ class Ball {
 }
 
 function setup() {
-  createCanvas(600, 400)
+	createCanvas(600, 400)
+
+  cx = 20;
+  cy = 200;
+  cv = 2;
+  px = 560;
+  py = 200;
+  pv = 2;
 
   ball1 = new Ball(0, 200, 10, 10, 5, 5)
 }
 
 function draw() {
-  background(225)
+	background(225);
+  let a = color('red')
+  rect(cx, cy, 20, 70);
+  fill(a)
+  cy = cy + cv
+ 
 
+  if(cy < 0 || cy > 350) {
+   cv = cv * -1;
+  }
+
+
+  rect(px, py, 20, 70);
+  fill(a)
+  py = py + pv
+
+  if(py < 0 || py > 350) {
+   pv = pv * -1;
+  }
   ball1.drawBall()
 
 }
