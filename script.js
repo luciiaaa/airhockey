@@ -37,12 +37,13 @@ function setup() {
   py = 200;
   pv = 2;
 
-  ball1 = new Ball(0, 200, 10, 10, 5, 5)
+  ball1 = new Ball(0, 300, 20, 20, 5, 5)
 }
 
 function draw() {
 	background(225);
-  let a = color('red')
+
+  let a = color('green')
   rect(cx, cy, 20, 70);
   fill(a)
   cy = cy + cv
@@ -53,7 +54,7 @@ function draw() {
   }
 
 
-  rect(px, py, 20, 70);
+  rect(px, mouseY, 20, 70);
   fill(a)
   py = py + pv
 
