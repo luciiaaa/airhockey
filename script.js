@@ -41,7 +41,7 @@ function setup() {
 }
 
 function draw() {
-	background(225);
+	background(0);
 
   let a = color('green')
   rect(cx, cy, 20, 70);
