@@ -29,6 +29,7 @@ class Ball {
 
 function setup() {
   createCanvas(600, 400);
+  ball1 = new Ball(100, 300, 20, 20, 5, 5);
 }
 
 function draw() {
@@ -58,8 +59,7 @@ function draw() {
 }
 
 function game() {
-  createCanvas(600, 400)
-
+  background(0);
   cx = 20;
   cy = 200;
   cv = 2;
@@ -67,9 +67,9 @@ function game() {
   py = 200;
   pv = 2;
 
-  ball1 = new Ball(0, 300, 20, 20, 5, 5)
+  ball1.drawBall();
 
-  background(0);
+
 
   let a = color('green')
   rect(cx, cy, 20, 70);
@@ -109,8 +109,8 @@ function menu() {
   fill(a);
   text('start', 70, 96);
   text('instructions', 70, 246);
- 
-  
+
+
   if (mouseButton == RIGHT) {
     gameState = 0;
   }
