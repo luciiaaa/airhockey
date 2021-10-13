@@ -3,6 +3,7 @@ let speed = 3;
 let score = 0
 var img;
 var bg;
+var bal;
 
 class Ball {
   constructor(x, y, h, w, vx, vy) {
@@ -74,7 +75,7 @@ class Goal {
   }
 
   drawGoal() {
-    fill(this.c)
+    fill('black')
 
     rect(this.x, this.y, this.w, this.h);
 
@@ -96,8 +97,9 @@ function setup() {
   //player2 = new Player(550, 20);
   goal1 = new Goal (0,150, 20, 150 );
   goal2 = new Goal (580, 150, 20, 150 );
-  img = loadImage('images/startmenu.jpg')
+  img = loadImage('images/startmenu.png')
   bg = loadImage('images/gamebg.jpg')
+  bal = loadImage('ímages/balletje.png')
 }
 
 function draw() {
