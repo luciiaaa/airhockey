@@ -1,6 +1,8 @@
 var gameState = 0;
 let speed = 3;
 let score = 0
+var img;
+var bg;
 
 class Ball {
   constructor(x, y, h, w, vx, vy) {
@@ -93,6 +95,8 @@ function setup() {
   //player2 = new Player(550, 20);
   goal1 = new Goal (0,150, 20, 150 );
   goal2 = new Goal (580, 150, 20, 150 );
+  img = loadImage('images/startmenu.jpg')
+  bg = loadImage('images/gamebg.jpg')
 }
 
 function draw() {
@@ -122,7 +126,7 @@ function draw() {
 }
 
 function game() {
-  background(0);
+  background(bg);
 
   player1.drawPlayer();
   ball.drawBall();
@@ -142,8 +146,8 @@ function game() {
 }
 
 function menu() {
-  background(255);
-  b = 'green'
+  background(img);
+  b = 'purple'
   fill(b);
   rect(50, 50, 200, 75);
   fill(b);
