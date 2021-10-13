@@ -53,6 +53,8 @@ class Player {
     this.y = mouseY;
     rect(mouseX, mouseY, this.w, this.h);
 
+    
+
 
     if (ball.x < this.x + this.w && ball.x + ball.w > this.x) {
       if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
@@ -96,7 +98,7 @@ function setup() {
   createCanvas(600, 400);
   ball = new Ball(100, 300, 20, 20, 5, 5);
   player1 = new Player(20, 200);
-  //player2 = new Player(550, 20);
+  player2 = new Player(60, 340);
   goal1 = new Goal (0,150, 20, 150 );
   goal2 = new Goal (580, 150, 20, 150 );
   img = loadImage('images/startmenu.png')
@@ -128,6 +130,9 @@ function draw() {
       gameState = 0
     }
   }
+  if (game)
+
+
 }
 
 function game() {
@@ -141,6 +146,9 @@ function game() {
   textSize(24);
   text("Score: " + score, 10, 25);
   text ("Score: " +  score, 490, 25);
+  if (score>10){
+    gameState == 4
+  }
 
   if (mouseButton == RIGHT) {
     gameState = 0
