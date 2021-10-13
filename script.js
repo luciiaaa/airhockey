@@ -121,12 +121,10 @@ function draw() {
 function game() {
   background(0);
   
-
-  ball1.drawBall();
   player1.drawPlayer();
   ballBounce();
   //Score
-  fill("black");
+  fill("white");
   textSize(24);
   text("Score: " + score, 10, 25);
   
