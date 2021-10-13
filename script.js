@@ -1,6 +1,6 @@
 var gameState = 0;
 let speed = 3;
-
+var score = 0
 var img;
 var bg1;
 var bg2;
@@ -17,11 +17,11 @@ class Ball {
   }
 
   drawBall() {
-    image(bal,this.x, this.y, this.h, this.w);
+    image(bal, this.x, this.y, this.h, this.w);
     this.x = this.x + this.vx
     this.y = this.y + this.vy
-    
-  
+
+
 
     if (this.x < 0 || this.x > width) {
       this.vx = this.vx * -1;
@@ -53,13 +53,13 @@ class Player {
     this.y = mouseY;
     rect(mouseX, mouseY, this.w, this.h);
 
-    
+
 
 
     if (ball.x < this.x + this.w && ball.x + ball.w > this.x) {
       if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
         ball.vx = ball.vx * -1;
-       ;
+        ;
       }
     }
 
@@ -99,8 +99,8 @@ function setup() {
   ball = new Ball(100, 300, 20, 20, 5, 5);
   player1 = new Player(20, 200);
   player2 = new Player(60, 340);
-  goal1 = new Goal (0,150, 20, 150 );
-  goal2 = new Goal (580, 150, 20, 150 );
+  goal1 = new Goal(0, 150, 20, 150);
+  goal2 = new Goal(580, 150, 20, 150);
   img = loadImage('images/startmenu.png')
   bg1 = loadImage('images/gamebg.jpg')
   bal = loadImage('images/redball.png')
@@ -130,18 +130,26 @@ function draw() {
       gameState = 0
     }
   }
-  if (gameState == 4){
-    background ('black');
-    textSize (300)
-    text ('DOOD')
+  if (gameState == 4) {
+    gameOver();
   }
 
 
 }
 
-function score(){
-  
+function gameOver() {
+  background("black");
+  text("GAME OVER", 25, 45);
+  x = 0;
+  if (score1 == 10) {
+    text("GAME OVER", 25, 45)
+    if (score2 == 10) {
+      text("YOU WON")
+    }
+  }
 }
+  
+
 
 function game() {
   background(bg1);
@@ -153,8 +161,8 @@ function game() {
   fill("white");
   textSize(24);
   text("Score: " + score, 10, 25);
-  text ("Score: " +  score, 490, 25);
-  if (score>10){
+  text("Score: " + score, 490, 25);
+  if (score > 10) {
     gameState == 4
   }
 
