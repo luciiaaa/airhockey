@@ -105,7 +105,6 @@ function draw() {
     menu();
   }
 
-
   if (gameState == 1) {
     game();
   }
