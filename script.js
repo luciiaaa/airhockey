@@ -2,7 +2,8 @@ var gameState = 0;
 let speed = 3;
 let score = 0
 var img;
-var bg;
+var bg1;
+var bg2;
 var bal;
 
 class Ball {
@@ -16,10 +17,11 @@ class Ball {
   }
 
   drawBall() {
-    rect(this.x, this.y, this.h, this.w);
+    bal = rect(this.x, this.y, this.h, this.w);
     this.x = this.x + this.vx
     this.y = this.y + this.vy
-
+    
+  
 
     if (this.x < 0 || this.x > width) {
       this.vx = this.vx * -1;
@@ -98,8 +100,9 @@ function setup() {
   goal1 = new Goal (0,150, 20, 150 );
   goal2 = new Goal (580, 150, 20, 150 );
   img = loadImage('images/startmenu.png')
-  bg = loadImage('images/gamebg.jpg')
-  bal = loadImage('ímages/balletje.png')
+  bg1 = loadImage('images/gamebg.jpg')
+  bal = loadImage('images/bal.png')
+  bg2 = loadImage('images/instructiebg.jpg')
 }
 
 function draw() {
@@ -113,13 +116,13 @@ function draw() {
   }
 
   if (gameState == 2) {
-    background(0)
+    background(bg2)
     textSize(15)
     text('druk op rechter muisknop om terug bij menu te komen', 230, 50)
     textSize(20)
     text('1. Gebruik je muis om de balk te bewegen. ', 20, 175)
     text('2. Probeer de bal tegen te houden.', 20, 225)
-    text('Als de bal langs je balk komt heeft de tegenstander een punt.', 20, 275)
+    text('Als de bal langs in je goal komt heeft de tegenstander een punt.', 20, 275)
     text('3. Het spel is afgelopen als iemand 10 punten behaald.', 20, 325)
     if (mouseButton == RIGHT) {
       gameState = 0
@@ -128,7 +131,7 @@ function draw() {
 }
 
 function game() {
-  background(bg);
+  background(bg1);
 
   player1.drawPlayer();
   ball.drawBall();
