@@ -1,12 +1,4 @@
 var gameState = 0;
-
-
-let directionX = 1.5;
-let directionY = 1;
-let paddle_width = 20;
-let paddle_height = 70;
-let ball_x = 100;
-let ball_y = 100;
 let speed = 3;
 let score = 0
 
@@ -21,22 +13,23 @@ class Ball {
   }
 
   drawBall() {
-    ellipse(this.x, this.y, this.h, this.w);
+    rect(this.x, this.y, this.h, this.w);
     this.x = this.x + this.vx
     this.y = this.y + this.vy
 
 
-    if (this.x < 0 || this.x > 600) {
+    if (this.x < 0 || this.x > width) {
       this.vx = this.vx * -1;
     }
 
-    if (this.y < 0 || this.y > 400) {
+    if (this.y < 0 || this.y > height) {
       this.vy = this.vy * -1;
     }
   }
 }
 
-var player1, player2
+var player1, player2, goal1, goal2
+
 class Player {
   constructor(x, y) {
     this.x = x;
@@ -55,41 +48,51 @@ class Player {
     this.y = mouseY;
     rect(mouseX, mouseY, this.w, this.h);
 
-    //console.log(ball_x, this.x, this.w);
 
-    if(ball_x < this.x + this.w && ball_x + 20 > this.x){ 
-      if(ball_y < this.y + this.h && ball_y + 70 > this.y)
-       directionX = -directionX
-       directionY = -directionY
-       score++;
-
-      
-     
-      
+    if (ball.x < this.x + this.w && ball.x + ball.w > this.x) {
+      if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
+        ball.vx = ball.vx * -1;
+        score++;
+      }
     }
-    
 
+  }
+}
 
-    // if (ball_y < paddle_height && ball_x > mouseX - this.w / 2 &&
-    //   ball_x < mouseX + this.h / 2) {
-    //   directionX = -directionX
-    // }
+class Goal {
+  constructor(x, y, w, h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.vx = 0;
+    this.vy = 0;
+    this.c = "green";
 
-    // this.y = this.y + this.vx
+  }
 
+  drawGoal() {
+    fill(this.c)
 
-    // if (this.y < 0 || this.y > 350) {
-    //   this.vx = this.vx * -1;
-    // }
+    rect(this.x, this.y, this.w, this.h);
 
+    if (ball.x < this.x + this.w && ball.x + ball.w > this.x) {
+      if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
+        score--;
+        ball.x = width / 2;
+        ball.y = height / 2;
+      }
+    }
   }
 }
 
 function setup() {
   createCanvas(600, 400);
-  ball1 = new Ball(100, 300, 20, 20, 5, 5);
+  ball = new Ball(100, 300, 20, 20, 5, 5);
   player1 = new Player(20, 200);
   //player2 = new Player(550, 20);
+  goal1 = new Goal (0,150, 20, 150 );
+  goal2 = new Goal (580, 150, 20, 150 );
 }
 
 function draw() {
@@ -120,32 +123,22 @@ function draw() {
 
 function game() {
   background(0);
-  
+
   player1.drawPlayer();
-  ballBounce();
+  ball.drawBall();
+  //ballBounce();
   //Score
   fill("white");
   textSize(24);
   text("Score: " + score, 10, 25);
-  
+
   if (mouseButton == RIGHT) {
     gameState = 0
   }
-}
 
-function ballBounce() {
+  goal1.drawGoal();
+  goal2.drawGoal();
 
-  ellipse(ball_x, ball_y, 20, 20);
-  ball_x += directionX * speed;
-  ball_y += directionY * speed;
-
-  if (ball_x >= width || ball_x <= 0) {
-    directionX = -directionX
-  }
-
-  if (ball_y >= height || ball_y <= 4) {
-    directionY = -directionY
-  }
 }
 
 function menu() {
