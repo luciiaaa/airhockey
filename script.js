@@ -1,5 +1,14 @@
 var gameState = 0;
-var cx, px, cy, py, cv, pv;
+
+
+let directionX = 1.5;
+let directionY = 1;
+let paddle_width = 20;
+let paddle_height = 70;
+let ball_x = 100;
+let ball_y = 100;
+let speed = 3;
+let score = 0
 
 class Ball {
   constructor(x, y, h, w, vx, vy) {
@@ -27,9 +36,60 @@ class Ball {
   }
 }
 
+var player1, player2
+class Player {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.w = 20;
+    this.h = 70;
+    this.vx = 0;
+    this.vy = 0;
+    this.c = "green";
+
+  }
+
+  drawPlayer() {
+    fill(this.c)
+    this.x = mouseX;
+    this.y = mouseY;
+    rect(mouseX, mouseY, this.w, this.h);
+
+    //console.log(ball_x, this.x, this.w);
+
+    if(ball_x < this.x + this.w && ball_x + 20 > this.x){ 
+      if(ball_y < this.y + this.h && ball_y + 70 > this.y)
+       directionX = -directionX
+       directionY = -directionY
+       score++;
+
+      
+     
+      
+    }
+    
+
+
+    // if (ball_y < paddle_height && ball_x > mouseX - this.w / 2 &&
+    //   ball_x < mouseX + this.h / 2) {
+    //   directionX = -directionX
+    // }
+
+    // this.y = this.y + this.vx
+
+
+    // if (this.y < 0 || this.y > 350) {
+    //   this.vx = this.vx * -1;
+    // }
+
+  }
+}
+
 function setup() {
   createCanvas(600, 400);
   ball1 = new Ball(100, 300, 20, 20, 5, 5);
+  player1 = new Player(20, 200);
+  //player2 = new Player(550, 20);
 }
 
 function draw() {
@@ -60,40 +120,33 @@ function draw() {
 
 function game() {
   background(0);
-  cx = 20;
-  cy = 200;
-  cv = 2;
-  px = 560;
-  py = 200;
-  pv = 2;
+  
 
   ball1.drawBall();
-
-
-
-  let a = color('green')
-  rect(cx, cy, 20, 70);
-  fill(a)
-  cy = cy + cv
-
-
-  if (cy < 0 || cy > 350) {
-    cv = cv * -1;
-  }
-
-
-  rect(px, mouseY, 20, 70);
-  fill(a)
-  py = py + pv
-
-  if (py < 0 || py > 350) {
-    pv = pv * -1;
-  }
-
-  ball1.drawBall();
-
+  player1.drawPlayer();
+  ballBounce();
+  //Score
+  fill("black");
+  textSize(24);
+  text("Score: " + score, 10, 25);
+  
   if (mouseButton == RIGHT) {
     gameState = 0
+  }
+}
+
+function ballBounce() {
+
+  ellipse(ball_x, ball_y, 20, 20);
+  ball_x += directionX * speed;
+  ball_y += directionY * speed;
+
+  if (ball_x >= width || ball_x <= 0) {
+    directionX = -directionX
+  }
+
+  if (ball_y >= height || ball_y <= 4) {
+    directionY = -directionY
   }
 }
 
