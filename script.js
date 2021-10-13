@@ -17,7 +17,7 @@ class Ball {
   }
 
   drawBall() {
-    bal = rect(this.x, this.y, this.h, this.w);
+    image(bal,this.x, this.y, this.h, this.w);
     this.x = this.x + this.vx
     this.y = this.y + this.vy
     
@@ -103,7 +103,7 @@ function setup() {
   goal2 = new Goal (580, 150, 20, 150 );
   img = loadImage('images/startmenu.png')
   bg1 = loadImage('images/gamebg.jpg')
-  bal = loadImage('images/bal.png')
+  bal = loadImage('images/redball.png')
   bg2 = loadImage('images/instructiebg.jpg')
 }
 
