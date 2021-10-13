@@ -1,6 +1,6 @@
 var gameState = 0;
 let speed = 3;
-let score = 0
+
 var img;
 var bg1;
 var bg2;
@@ -130,9 +130,17 @@ function draw() {
       gameState = 0
     }
   }
-  if (game)
+  if (gameState == 4){
+    background ('black');
+    textSize (300)
+    text ('DOOD')
+  }
 
 
+}
+
+function score(){
+  
 }
 
 function game() {
@@ -177,6 +185,8 @@ function menu() {
     gameState = 0;
   }
 }
+
+
 
 function mouseClicked() {
   if (gameState == 0) {
