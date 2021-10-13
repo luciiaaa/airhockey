@@ -54,7 +54,7 @@ class Player {
     if (ball.x < this.x + this.w && ball.x + ball.w > this.x) {
       if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
         ball.vx = ball.vx * -1;
-        score++;
+       ;
       }
     }
 
@@ -80,7 +80,8 @@ class Goal {
 
     if (ball.x < this.x + this.w && ball.x + ball.w > this.x) {
       if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
-        score--;
+        score++;
+
         ball.x = width / 2;
         ball.y = height / 2;
       }
@@ -134,6 +135,7 @@ function game() {
   fill("white");
   textSize(24);
   text("Score: " + score, 10, 25);
+  text ("Score: " +  score, 490, 25);
 
   if (mouseButton == RIGHT) {
     gameState = 0
