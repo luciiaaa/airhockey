@@ -36,7 +36,7 @@ class Ball {
 var player1, player2, goal1, goal2
 
 class Player {
-  constructor(x, y) {
+  constructor(x, y, control) {
     this.x = x;
     this.y = y;
     this.w = 20;
@@ -44,27 +44,79 @@ class Player {
     this.vx = 0;
     this.vy = 0;
     this.c = "green";
+    this.control = control
 
   }
 
   drawPlayer() {
-    fill(this.c)
-    this.x = mouseX;
-    this.y = mouseY;
-    rect(mouseX, mouseY, this.w, this.h);
-
-
-
+    fill(this.c);
 
     if (ball.x < this.x + this.w && ball.x + ball.w > this.x) {
       if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
         ball.vx = ball.vx * -1;
-        ;
+
       }
     }
 
+
+    if (this.control == "m") {
+      this.x = mouseX
+      this.y = mouseY
+      rect(this.x, this.y, this.w, this.h);
+
+
+    }
+
+    
   }
 }
+
+class Player2 {
+  constructor(x, y, control) {
+    this.x = x;
+    this.y = y;
+    this.w = 20;
+    this.h = 70;
+    this.vx = 0;
+    this.vy = 0;
+    this.c = "green";
+    this.control = control
+
+  }
+
+  drawPlayer2() {
+    fill(this.c);
+
+    if (ball.x < this.x + this.w && ball.x + ball.w > this.x) {
+      if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
+        ball.vx = ball.vx * -1;
+
+      }
+    }
+
+
+
+    if (this.control = "m") {
+      fill("blue")
+      rect(this.x, this.y, this.w, this.h);
+      if (keyIsDown(LEFT_ARROW)) {
+        this.x -= 5;
+      }
+      if (keyIsDown(RIGHT_ARROW)) {
+        this.x += 5;
+      }
+      if (keyIsDown(UP_ARROW)) {
+        this.y -= 5;
+      }
+      if (keyIsDown(DOWN_ARROW)) {
+        this.y += 5;
+      }
+    }
+  }
+}
+
+
+
 
 class Goal {
   constructor(x, y, w, h) {
@@ -98,7 +150,7 @@ function setup() {
   createCanvas(600, 400);
   ball = new Ball(100, 300, 20, 20, 5, 5);
   player1 = new Player(20, 200);
-  player2 = new Player(60, 340);
+  player2 = new Player2(60, 340);
   goal1 = new Goal(0, 150, 20, 150);
   goal2 = new Goal(580, 150, 20, 150);
   img = loadImage('images/startmenu.png')
@@ -148,13 +200,15 @@ function gameOver() {
     }
   }
 }
-  
+
 
 
 function game() {
   background(bg1);
 
   player1.drawPlayer();
+  player2.drawPlayer2();
+
   ball.drawBall();
   //ballBounce();
   //Score
