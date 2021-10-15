@@ -1,10 +1,10 @@
 var gameState = 0;
 let speed = 3;
-var score = 0
 var img;
 var bg1;
 var bg2;
 var bal;
+var score = 0
 
 class Ball {
   constructor(x, y, h, w, vx, vy) {
@@ -33,7 +33,7 @@ class Ball {
   }
 }
 
-var player1, player2, goal1, goal2
+var player1, player2, goal1, goal2, score1, score2
 
 class Player {
   constructor(x, y, control) {
@@ -116,7 +116,24 @@ class Player2 {
 }
 
 
+class Score {
+  constructor(x, y, score) {
+    this.x = x;
+    this.y = y;
+    this.score = 0
 
+  }
+
+  drawScore() {
+    fill("white");
+    textSize(24);
+    text("Score: " + this.score, this.x, this.y);
+   
+    if (score == 10) {
+      gameState == 4
+    }
+  }
+}
 
 class Goal {
   constructor(x, y, w, h) {
@@ -155,6 +172,8 @@ function setup() {
   player2 = new Player2(60, 340);
   goal1 = new Goal(0, 100, 20, 225);
   goal2 = new Goal(580, 100, 20, 225);
+  score1 = new Score (10, 25, 0)
+  score2 = new Score (550, 25, 0)
   img = loadImage('images/startmenu.png')
   bg1 = loadImage('images/gamebg.jpg')
   bal = loadImage('images/redball.png')
@@ -196,9 +215,9 @@ function gameOver() {
   text("GAME OVER", 25, 45);
   x = 0;
   if (score1 == 10) {
-    text("GAMEOVER"+ enter+"YOU WON PLAYER2 , YOU LOST PLAYER1", 25, 45)
+    text("GAMEOVER" + enter + "YOU WON PLAYER2 , YOU LOST PLAYER1", 25, 45)
     if (score2 == 10) {
-      text("GAMEOVER"+ enter+"YOU WON PLAYER1 , YOU LOST PLAYER2")
+      text("GAMEOVER" + enter + "YOU WON PLAYER1 , YOU LOST PLAYER2")
     }
   }
 }
@@ -209,21 +228,14 @@ function game() {
   background(bg1);
 
   player1.drawPlayer();
- 
-
   player2.drawPlayer2();
- 
+  score1.drawScore();
+  score2.drawScore();
+
 
   ball.drawBall();
- 
-  //Score
-  fill("white");
-  textSize(24);
-  text("Score: " + score, 10, 25);
-  text("Score: " + score, 490, 25);
-  if (score > 10) {
-    gameState == 4
-  }
+
+
 
   if (mouseButton == RIGHT) {
     gameState = 0
