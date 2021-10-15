@@ -137,10 +137,12 @@ class Goal {
 
     if (ball.x < this.x + this.w && ball.x + ball.w > this.x) {
       if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
-        score++;
+        
 
         ball.x = width / 2;
         ball.y = height / 2;
+        
+       
       }
     }
   }
@@ -148,11 +150,11 @@ class Goal {
 
 function setup() {
   createCanvas(600, 400);
-  ball = new Ball(100, 300, 20, 20, 5, 5);
+  ball = new Ball(100, 300, 20, 20, 3, 3);
   player1 = new Player(20, 200);
   player2 = new Player2(60, 340);
-  goal1 = new Goal(0, 150, 20, 150);
-  goal2 = new Goal(580, 150, 20, 150);
+  goal1 = new Goal(0, 100, 20, 225);
+  goal2 = new Goal(580, 100, 20, 225);
   img = loadImage('images/startmenu.png')
   bg1 = loadImage('images/gamebg.jpg')
   bal = loadImage('images/redball.png')
