@@ -59,20 +59,20 @@ class Player {
     }
 
 
-    if (this.control == "m") {
+   
       this.x = mouseX
       this.y = mouseY
       rect(this.x, this.y, this.w, this.h);
 
 
-    }
+    
 
     
   }
 }
 
 class Player2 {
-  constructor(x, y, control) {
+  constructor(x, y, control2) {
     this.x = x;
     this.y = y;
     this.w = 20;
@@ -80,7 +80,7 @@ class Player2 {
     this.vx = 0;
     this.vy = 0;
     this.c = "green";
-    this.control = control
+    this.control = control2
 
   }
 
