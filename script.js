@@ -59,15 +59,15 @@ class Player {
     }
 
 
-   
-      this.x = mouseX
-      this.y = mouseY
-      rect(this.x, this.y, this.w, this.h);
+
+    this.x = mouseX
+    this.y = mouseY
+    rect(this.x, this.y, this.w, this.h);
 
 
-    
 
-    
+
+
   }
 }
 
@@ -137,12 +137,12 @@ class Goal {
 
     if (ball.x < this.x + this.w && ball.x + ball.w > this.x) {
       if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
-        
+
 
         ball.x = width / 2;
         ball.y = height / 2;
-        
-       
+
+
       }
     }
   }
@@ -196,9 +196,9 @@ function gameOver() {
   text("GAME OVER", 25, 45);
   x = 0;
   if (score1 == 10) {
-    text("GAME OVER", 25, 45)
+    text("GAMEOVER"+ enter+"YOU WON PLAYER2 , YOU LOST PLAYER1", 25, 45)
     if (score2 == 10) {
-      text("YOU WON")
+      text("GAMEOVER"+ enter+"YOU WON PLAYER1 , YOU LOST PLAYER2")
     }
   }
 }
@@ -209,10 +209,13 @@ function game() {
   background(bg1);
 
   player1.drawPlayer();
+ 
+
   player2.drawPlayer2();
+ 
 
   ball.drawBall();
-  //ballBounce();
+ 
   //Score
   fill("white");
   textSize(24);
