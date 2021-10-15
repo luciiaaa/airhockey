@@ -6,6 +6,7 @@ var img;
 var bg1;
 var bg2;
 var bal;
+var winner = '';
 
 class Ball {
   constructor(x, y, h, w, vx, vy) {
@@ -21,8 +22,6 @@ class Ball {
     image(bal, this.x, this.y, this.h, this.w);
     this.x = this.x + this.vx
     this.y = this.y + this.vy
-
-
 
     if (this.x < 0 || this.x > width) {
       this.vx = this.vx * -1;
@@ -58,16 +57,9 @@ class Player {
 
       }
     }
-
-
-
     this.x = mouseX
     this.y = mouseY
     rect(this.x, this.y, this.w, this.h);
-
-
-
-
 
   }
 }
@@ -159,9 +151,7 @@ function setup() {
   player1 = new Player(20, 200);
   player2 = new Player2(60, 340);
   goal1 = new Goal(0, 100, 20, 225);
-  
   goal2 = new Goal(580, 100, 20, 225);
- 
   img = loadImage('images/startmenu.png')
   bg1 = loadImage('images/gamebg.jpg')
   bal = loadImage('images/redball.png')
@@ -187,28 +177,39 @@ function draw() {
     text('2. Probeer de bal tegen te houden.', 20, 225)
     text('Als de bal langs in je goal komt heeft de tegenstander een punt.', 20, 275)
     text('3. Het spel is afgelopen als iemand 10 punten behaald.', 20, 325)
-    if (mouseButton == RIGHT) {
-      gameState = 0
-    }
+
   }
-  if (gameState == 4) {
-    gameOver();
+  if (gameState == 3) {
+    background("black");
+    fill('magenta')
+    text("GAME OVER ", 25, 45);
+    text("GAME OVER " + winner + " WON!", 25, 45)
+    text("Click 1 to go back menu .", 50, 80)
+    text("Click left to play again .", 50, 100)
+
+     if (keyPressed == 1) {
+      gameState = 0;
+    }
+    
+
+     
+  }
+}
+
+function keyPressed() {
+
+  if (keyCode == 49) {
+    gameState = 0;
   }
 
+  if (keyCode == 50) {
+    gameState = 1;
+  }
 
 }
 
-function gameOver() {
-  background("black");
-  text("GAME OVER", 25, 45);
-  x = 0;
-  if (score1 == 10) {
-    text("GAMEOVER" + enter + "YOU WON PLAYER2 , YOU LOST PLAYER1", 25, 45)
-    if (score2 == 10) {
-      text("GAMEOVER" + enter + "YOU WON PLAYER1 , YOU LOST PLAYER2")
-    }
-  }
-}
+
+
 
 
 
@@ -216,37 +217,36 @@ function game() {
   background(bg1);
 
   player1.drawPlayer();
-
-
-
-
   player2.drawPlayer2();
-
-
-
-
   ball.drawBall();
-
-  //Score
+  //score
   fill("white");
   textSize(24);
   text("Score: " + score1, 10, 25);
   text("Score: " + score2, 490, 25);
-  if (score1 > 10) {
-    gameState == 4
+  if (score1 >= 10) {
+    gameState = 3;
+    winner = 'Player 1';
   }
 
-  if (score2 > 10) {
-    gameState == 4
+  if (score2 >= 10) {
+    gameState = 3;
+    winner = 'Player 2';
   }
 
   if (mouseButton == RIGHT) {
-    gameState = 0
+    gameState = 0;
   }
 
+  if (keyPressed == 2){
+    gameState = 1;
+  }
+
+
+  
   goal1.drawGoal();
   goal2.drawGoal();
-  score2  = goal1.score;
+  score2 = goal1.score;
   score1 = goal2.score;
 }
 
@@ -263,10 +263,13 @@ function menu() {
   text('start', 70, 96);
   text('instructions', 70, 246);
 
-
   if (mouseButton == RIGHT) {
     gameState = 0;
   }
+
+  
+
+
 }
 
 
@@ -280,6 +283,9 @@ function mouseClicked() {
       if (mouseY < 275 && mouseY > 200) {
         gameState = 2
       }
+
     }
   }
+
+
 }
