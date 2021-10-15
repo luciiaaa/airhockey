@@ -1,10 +1,11 @@
 var gameState = 0;
 let speed = 3;
+var score1 = 0
+var score2 = 0
 var img;
 var bg1;
 var bg2;
 var bal;
-var score = 0
 
 class Ball {
   constructor(x, y, h, w, vx, vy) {
@@ -33,7 +34,7 @@ class Ball {
   }
 }
 
-var player1, player2, goal1, goal2, score1, score2
+var player1, player2, goal1, goal2
 
 class Player {
   constructor(x, y, control) {
@@ -116,27 +117,10 @@ class Player2 {
 }
 
 
-class Score {
-  constructor(x, y, score) {
-    this.x = x;
-    this.y = y;
-    this.score = 0
 
-  }
-
-  drawScore() {
-    fill("white");
-    textSize(24);
-    text("Score: " + this.score, this.x, this.y);
-   
-    if (score == 10) {
-      gameState == 4
-    }
-  }
-}
 
 class Goal {
-  constructor(x, y, w, h) {
+  constructor(x, y, w, h, score) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -144,24 +128,28 @@ class Goal {
     this.vx = 0;
     this.vy = 0;
     this.c = "green";
+    this.score = 0;
 
   }
 
-  drawGoal() {
+  drawGoal(score) {
     fill('black')
 
     rect(this.x, this.y, this.w, this.h);
 
     if (ball.x < this.x + this.w && ball.x + ball.w > this.x) {
+
       if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
 
 
+        this.score = thscore + 1
         ball.x = width / 2;
         ball.y = height / 2;
 
 
       }
     }
+
   }
 }
 
@@ -172,8 +160,6 @@ function setup() {
   player2 = new Player2(60, 340);
   goal1 = new Goal(0, 100, 20, 225);
   goal2 = new Goal(580, 100, 20, 225);
-  score1 = new Score (10, 25, 0)
-  score2 = new Score (550, 25, 0)
   img = loadImage('images/startmenu.png')
   bg1 = loadImage('images/gamebg.jpg')
   bal = loadImage('images/redball.png')
@@ -228,14 +214,29 @@ function game() {
   background(bg1);
 
   player1.drawPlayer();
+
+
+
+
   player2.drawPlayer2();
-  score1.drawScore();
-  score2.drawScore();
+
+
 
 
   ball.drawBall();
 
+  //Score
+  fill("white");
+  textSize(24);
+  text("Score: " + score1, 10, 25);
+  text("Score: " + score2, 490, 25);
+  if (score1 > 10) {
+    gameState == 4
+  }
 
+  if (score2 > 10) {
+    gameState == 4
+  }
 
   if (mouseButton == RIGHT) {
     gameState = 0
