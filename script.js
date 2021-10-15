@@ -132,7 +132,7 @@ class Goal {
 
   }
 
-  drawGoal(score) {
+  drawGoal() {
     fill('black')
 
     rect(this.x, this.y, this.w, this.h);
@@ -142,7 +142,7 @@ class Goal {
       if (ball.y < this.y + this.h && ball.y + ball.y > this.y) {
 
 
-        this.score = thscore + 1
+        this.score = this.score + 1
         ball.x = width / 2;
         ball.y = height / 2;
 
@@ -159,7 +159,9 @@ function setup() {
   player1 = new Player(20, 200);
   player2 = new Player2(60, 340);
   goal1 = new Goal(0, 100, 20, 225);
+  
   goal2 = new Goal(580, 100, 20, 225);
+ 
   img = loadImage('images/startmenu.png')
   bg1 = loadImage('images/gamebg.jpg')
   bal = loadImage('images/redball.png')
@@ -244,7 +246,8 @@ function game() {
 
   goal1.drawGoal();
   goal2.drawGoal();
-
+  score2  = goal1.score;
+  score1 = goal2.score;
 }
 
 function menu() {
