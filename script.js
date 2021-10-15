@@ -97,7 +97,7 @@ class Player2 {
 
 
     if (this.control = "m") {
-      fill("blue")
+      fill("green")
       rect(this.x, this.y, this.w, this.h);
       if (keyIsDown(LEFT_ARROW)) {
         this.x -= 5;
